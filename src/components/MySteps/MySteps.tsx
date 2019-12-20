@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
-import { Steps, Button } from 'antd'
+import { Steps, Button, message } from 'antd'
 
 const { Step } = Steps
 
-const steps = [
+interface StepShape {
+  title: string
+  content?: string
+}
+
+const steps: Array<StepShape> = [
   {
     title: 'First',
     content: 'First-content'
@@ -21,11 +26,11 @@ const steps = [
 const MySteps: React.FC = () => {
   const [current, setCurent] = useState(0)
 
-  function handleNext() {
+  function handleNext(): void {
     setCurent(current => current + 1)
   }
 
-  function handleRfresh() {
+  function handleRfresh(): void {
     setCurent(0)
   }
 
@@ -42,7 +47,11 @@ const MySteps: React.FC = () => {
         </Button>
       )}
       {current >= steps.length - 1 && (
-        <Button style={{ marginTop: 50 }} type='primary'>
+        <Button
+          onClick={() => message.success('Processing complete!')}
+          style={{ marginTop: 50 }}
+          type='primary'
+        >
           Done
         </Button>
       )}
