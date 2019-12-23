@@ -1,5 +1,5 @@
 import React from 'react'
-import MySteps from '@/components/MySteps/index'
+import MySteps from '@/components/MySteps'
 
 const Test: React.FC = () => {
   return (

@@ -1,31 +1,22 @@
-import React, { FC, useState } from 'react'
-import { Layout, Icon } from 'antd'
-import './layouts.scss'
+import React, { FC } from 'react'
+import { Layout } from 'antd'
+import { renderRoutes, RouteConfigComponentProps } from 'react-router-config'
+
 import DuSider from '@/components/DuSider'
+import DuHeader from '@/components/DuHeader/index'
+import './layouts.scss'
 
-const { Header, Content } = Layout
+const { Content } = Layout
 
-const DefaultLayout: FC = () => {
-  const [collapsed, setCollapsed] = useState(false)
-
-  function toggleSider(): void {
-    setCollapsed(prev => !prev)
-  }
-
+const DefaultLayout: FC<RouteConfigComponentProps> = ({ route }) => {
   return (
     <Layout>
-      <DuSider collapsed={collapsed} onToggleSider={toggleSider} />
+      <DuSider routes={route && route.routes} />
       <Layout>
-        <Header style={{ background: '#fff', padding: 0 }}>
-          <Icon
-            className='trigger'
-            type={collapsed ? 'menu-unfold' : 'menu-fold'}
-            onClick={toggleSider}
-          />
-        </Header>
+        <DuHeader />
         <Content style={{ margin: '24px 16px 0' }}>
           <div style={{ padding: 24, background: '#fff', minHeight: 420 }}>
-            content
+            {route && renderRoutes(route.routes)}
           </div>
         </Content>
       </Layout>
