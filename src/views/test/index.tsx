@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
-import { renderRoutes, RouteConfigComponentProps } from 'react-router-config'
+import { RouteConfigComponentProps } from 'react-router-config'
 
+import renderRoutes from '@/utils/router-config'
 import MySteps from '@/components/MySteps'
 
 const Test: FC<RouteConfigComponentProps> = ({ route }) => {

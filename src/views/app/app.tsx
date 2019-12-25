@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import { Provider } from 'react-redux'
-import { renderRoutes } from 'react-router-config'
+// import { renderRoutes } from 'react-router-config'
 import { HashRouter as Router } from 'react-router-dom'
 
+import renderRoutes from '@/utils/router-config'
 import routes from '@/routes'
 import store from '@/store'
 import './app.scss'

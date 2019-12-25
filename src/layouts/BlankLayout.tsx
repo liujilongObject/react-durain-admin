@@ -1,9 +1,16 @@
 import React, { FC } from 'react'
-import { renderRoutes, RouteConfigComponentProps } from 'react-router-config'
-// import { useHistory } from 'react-router-dom'
+import { RouteConfigComponentProps } from 'react-router-config'
+import { connect } from 'react-redux'
 
-const BlankLayout: FC<RouteConfigComponentProps> = ({ route }) => {
-  return <div>{route && renderRoutes(route.routes)}</div>
+import renderRoutes from '@/utils/router-config'
+import { userTokenSelector } from '@/store/user/selectors'
+
+interface BasicLayoutProps extends RouteConfigComponentProps {
+  token: string
 }
 
-export default BlankLayout
+const BlankLayout: FC<BasicLayoutProps> = ({ route, token }) => {
+  return <div>{route && renderRoutes(route.routes, token ? true : false)}</div>
+}
+
+export default connect(userTokenSelector)(BlankLayout)

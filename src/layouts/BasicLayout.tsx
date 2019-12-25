@@ -1,14 +1,17 @@
 import React, { FC } from 'react'
 import { Layout } from 'antd'
-import { renderRoutes, RouteConfigComponentProps } from 'react-router-config'
+import { RouteConfigComponentProps } from 'react-router-config'
 
+import renderRoutes from '@/utils/router-config'
 import DuSider from '@/components/DuSider'
 import DuHeader from '@/components/DuHeader/index'
 import './layouts.scss'
 
 const { Content } = Layout
 
-const DefaultLayout: FC<RouteConfigComponentProps> = ({ route }) => {
+const BasicLayout: FC<RouteConfigComponentProps> = ({ route }) => {
+  console.log('---BasicLayout---')
+
   return (
     <Layout>
       <DuSider routes={route && route.routes} />
@@ -24,4 +27,4 @@ const DefaultLayout: FC<RouteConfigComponentProps> = ({ route }) => {
   )
 }
 
-export default DefaultLayout
+export default BasicLayout

@@ -1,25 +1,21 @@
 import React, { FC, FormEvent, useEffect } from 'react'
 import { Form, Input, Icon, Checkbox, Button, message } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
-import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
+import { setToken } from '@/store/user/actions'
 import './login.scss'
 
 interface LoginFormProps extends FormComponentProps {
-  someProps: any
+  someProps: object
 }
 
 const LoginForm: FC<LoginFormProps> = props => {
-  const history = useHistory()
+  const dispatch = useDispatch()
 
   const { getFieldDecorator, validateFields } = props.form
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      history.goBack()
-    }
-  }, [])
+  useEffect(() => {}, [])
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -28,9 +24,10 @@ const LoginForm: FC<LoginFormProps> = props => {
         console.log('Received values of form: ', values)
         const { username, password } = values
         if (username === 'admin' && password === 'adminpw') {
-          console.log(username, password)
-          localStorage.setItem('token', 'TOKEN')
-          history.replace('/')
+          dispatch(setToken({ token: 'TOKEN_TEST' }))
+          window.location.href = '#/dashboard'
+        } else {
+          message.error('Login failed, please login again!')
         }
       } else {
         message.error('Login failed, please login again!')
