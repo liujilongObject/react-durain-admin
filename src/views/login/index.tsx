@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useEffect } from 'react'
+import React, { FC, FormEvent, useEffect, useState } from 'react'
 import { Form, Input, Icon, Checkbox, Button, message } from 'antd'
 import { FormComponentProps } from 'antd/es/form'
 import { useDispatch } from 'react-redux'
@@ -12,6 +12,7 @@ interface LoginFormProps extends FormComponentProps {
 
 const LoginForm: FC<LoginFormProps> = props => {
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
 
   const { getFieldDecorator, validateFields } = props.form
 
@@ -19,18 +20,27 @@ const LoginForm: FC<LoginFormProps> = props => {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    setLoading(true)
     validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values)
-        const { username, password } = values
-        if (username === 'admin' && password === 'adminpw') {
-          dispatch(setToken({ token: 'TOKEN_TEST' }))
-          window.location.href = '#/dashboard'
+      try {
+        if (!err) {
+          console.log('Received values of form: ', values)
+          const { username, password } = values
+          if (username === 'admin' && password === 'adminpw') {
+            dispatch(setToken({ token: 'TOKEN_TEST' }))
+            setTimeout(() => {
+              window.location.href = '#/dashboard'
+            }, 2000)
+          } else {
+            message.error('Login failed, please login again!')
+            throw Error('Login failed, please login again!')
+          }
         } else {
           message.error('Login failed, please login again!')
+          throw Error('Login failed, please login again!')
         }
-      } else {
-        message.error('Login failed, please login again!')
+      } catch (error) {
+        setLoading(false)
       }
     })
   }
@@ -77,6 +87,7 @@ const LoginForm: FC<LoginFormProps> = props => {
               initialValue: true
             })(<Checkbox>Remember me</Checkbox>)}
             <Button
+              loading={loading}
               type='primary'
               htmlType='submit'
               className='login-form-button'

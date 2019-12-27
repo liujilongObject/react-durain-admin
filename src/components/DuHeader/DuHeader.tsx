@@ -4,6 +4,7 @@ import { connect, useDispatch } from 'react-redux'
 
 import { siderCollapsedSelector } from '@/store/settings/selectors'
 import { toggleSiderCollapsed } from '@/store/settings/actions'
+import './header.scss'
 
 const { Header } = Layout
 
@@ -21,12 +22,15 @@ const DuHeader: FC<DuHeaderProps> = props => {
 
   return (
     <>
-      <Header style={{ background: '#fff', padding: 0 }}>
+      <Header className='du-header'>
         <Icon
           className='trigger'
           type={siderCollapsed ? 'menu-unfold' : 'menu-fold'}
           onClick={toggleSider}
         />
+        <div className='header-avatar-wrapper'>
+          <img src={require('@/assets/images/logo.jpg')} />
+        </div>
       </Header>
     </>
   )

@@ -6,12 +6,12 @@ import { HashRouter as Router } from 'react-router-dom'
 import renderRoutes from '@/utils/router-config'
 import routes from '@/routes'
 import store from '@/store'
-import './app.scss'
+import '@/assets/styles/global.scss'
 
 const App: FC = () => {
   return (
     <Provider store={store}>
-      <div className='App'>
+      <div style={{ minHeight: '100vh' }}>
         <Router>{renderRoutes(routes)}</Router>
       </div>
     </Provider>
