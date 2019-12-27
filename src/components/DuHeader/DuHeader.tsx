@@ -29,7 +29,7 @@ const DuHeader: FC<DuHeaderProps> = props => {
           onClick={toggleSider}
         />
         <div className='header-avatar-wrapper'>
-          <img src={require('@/assets/images/logo.jpg')} />
+          <img alt='' src={require('@/assets/images/logo.jpg')} />
         </div>
       </Header>
     </>
