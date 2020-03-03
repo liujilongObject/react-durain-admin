@@ -19,6 +19,7 @@ export function userReducer(
       }
 
     case DELETE_TOKEN:
+      Cookies.remove('TOKEN')
       state.token = ''
       return state
 
