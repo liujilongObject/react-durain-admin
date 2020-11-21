@@ -95,7 +95,10 @@ const DuSider: FC<DuSiderProps> = props => {
       <Sider
         breakpoint='lg'
         style={{
-          minHeight: '100vh'
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0
         }}
         trigger={null}
         collapsed={siderCollapsed}
